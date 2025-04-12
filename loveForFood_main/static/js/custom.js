@@ -4,7 +4,7 @@ function initAutoComplete() {
     autocomplete = new google.maps.places.Autocomplete(
             document.getElementById('id_address'), {
                 types: ['geocode', 'establishment'],
-                componentRestrictions: { 'country': ['ie'] },
+                componentRestrictions: { 'country': ['BD'] },
             })
         // function to specify what should happen when the prediction is clicked
     autocomplete.addListener('place_changed', onPlaceChanged);
