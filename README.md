@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Python Django Multi-vendor Restaurant Marketplace project
 ![logo](/static/logo/loveForFoodLogo.png)
 ![Paid-badge](/static/images/paid.png)
@@ -84,3 +85,7 @@ For the Customer and the Restaurant/Vendor account, the same contains an email a
 - Deployment on Ubuntu Linode hosting server
 - Gunicorn and Nginx configuration
 - Custom domain name with certbot SSL certificate configuration
+=======
+# food-delivery-by-naomi
+A responsive Django web app simulating a real-world food delivery platform. Features include PayPal integration, vendor dashboards, custom user auth, admin approval, and dynamic menu management—showcasing strong full-stack development skills.
+>>>>>>> 49d8a2fd15ac85b8d6a3b056aff06cf5d924df23

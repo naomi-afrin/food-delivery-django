@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
 import os
@@ -25,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = False
 
-ALLOWED_HOSTS = ['139.162.162.140', '127.0.0.1','loveforfood.ml', 'www.loveforfood.ml']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'accounts',
     'vendor',
     'menu',
@@ -57,7 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'orders.request_object.RequestObjectMiddleware', # custom middleware created to access the request object in models.py
+    # custom middleware created to access the request object in models.py
+    'orders.request_object.RequestObjectMiddleware',
 ]
 
 ROOT_URLCONF = 'loveForFood_main.urls'
@@ -92,7 +94,7 @@ WSGI_APPLICATION = 'loveForFood_main.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
@@ -139,21 +141,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR /'static'
+STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
     'loveForFood_main/static'
 ]
 
 # Media files configuration
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR /'media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
@@ -165,18 +166,20 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL= 'loveForFood <naomiafrin12@gmail.com>'
+DEFAULT_FROM_EMAIL = 'loveForFood <naomiafrin12@gmail.com>'
 
 # Google API configuration
 # GOOGLE_API_KEY = config('GOOGLE_API_KEY')
 
 
-
 # Post Gis and GDAL configuration
 if DEBUG == True:
-    os.environ['PATH'] = os.path.join(BASE_DIR, 'foodonline\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
-    os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'foodonline\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
-    GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'foodonline\Lib\site-packages\osgeo\gdal304.dll')
+    os.environ['PATH'] = os.path.join(
+        BASE_DIR, 'foodonline\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+    os.environ['PROJ_LIB'] = os.path.join(
+        BASE_DIR, 'foodonline\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
+    GDAL_LIBRARY_PATH = os.path.join(
+        BASE_DIR, 'foodonline\Lib\site-packages\osgeo\gdal304.dll')
 
 # PayPAl configuration
 PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
