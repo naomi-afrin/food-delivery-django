@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['139.162.162.140', '127.0.0.1',
-                 'loveforfood.ml', 'www.loveforfood.ml']
+                 'loveforfood.ml', 'www.loveforfood.ml', '*']
 
 
 # Application definition
